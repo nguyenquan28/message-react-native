@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from './src/screen/Home';
 import Login from './src/screen/Login';
 import Story from './src/screen/Story';
+import ForgotPassword from './src/screen/ForgotPassword';
 
 // Create Tab navigator
 const Tab = createBottomTabNavigator();
@@ -34,7 +35,7 @@ const ButtonTabs = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'tomato',
+        activeTintColor: '#1877F2',
         inactiveTintColor: 'gray',
       }}
     >
@@ -64,6 +65,10 @@ const App = () => {
         <Stack.Screen
           name='Login'
           component={Login}
+        />
+        <Stack.Screen
+          name='ForgotPassword'
+          component={ForgotPassword}
         />
         <Stack.Screen
           name='Home'

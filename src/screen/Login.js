@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { AuthContext } from '../navigation/AuthProvider';
 
 const Login = ({ navigation }) => {
     const [userName, setUseName] = useState()
     const [password, setPassword] = useState()
-    const [error, setError] = useState('')
+    const [error, setError] = useState("")
+    const { login, user, errorFb, googleLogin, fbLogin } = useContext(AuthContext);
 
     const onLogin = () => {
         if (userName && password) {
-            navigation.replace('Home')
-            console.log('ok');
-            setError('')
+            login(userName, password)
+            // setError(errorFb)
+            // console.log('id: ' + errorFb);
+            // console.log(errorFb.indexOf("]"));
+            // let start = errorFb.indexOf("]")
+            // let end = errorFb.length
+            // console.log(errorFb.slice(start, end));
+
         } else {
-            console.log('no ok');
             setError('Please check your email or password')
         }
     }
@@ -38,6 +44,9 @@ const Login = ({ navigation }) => {
                         placeholder='Username'
                         onChangeText={setUseName}
                         borderColor={!userName ? "red" : '#ade4ff'}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                        autoCorrect={false}
                     />
 
                     {/* Input feld */}
@@ -45,6 +54,9 @@ const Login = ({ navigation }) => {
                         style={styles.input}
                         placeholder='Password'
                         onChangeText={setPassword}
+                        placeholderText="Password"
+                        iconType="lock"
+                        secureTextEntry={true}
                         borderColor={!password ? "red" : '#ade4ff'}
                     />
 
@@ -96,7 +108,7 @@ const Login = ({ navigation }) => {
                     Don't have account?
                 </Text>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('ForgotPassword')}
+                    onPress={() => navigation.navigate('Register')}
                 >
                     <Text style={{ color: '#174799' }}>Sign Up</Text>
                 </TouchableOpacity>
